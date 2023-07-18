@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock,Paper,Scissor</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <script src="jquery-3.7.0.js"></script>
+    <style>
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background-color: #e6e6fa;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 3rem;
+        margin-top: 0.1rem;
+        color: #000000;
+      }
+
+      .scoreboard {
+        text-align: center;
+        margin-top: 0.5rem;
+        font-size: 1.5rem;
+        margin: 0 30rem;
+        padding: 0.5rem;
+        border: 5px solid #000000;
+        border-radius: 5px;
+        color: #000000;
+      }
+
+      .choices {
+        display: flex;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+
+      .choice {
+        border: 2px solid #000000;
+        border-radius: 10px;
+        margin-top: 1rem;
+        margin: 0 2rem;
+        padding: 2rem;
+        background-color: #ffffff;
+        transition: transform 0.2s ease-in-out;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .choice:hover {
+        transform: scale(1.1);
+      }
+
+      .choice:active {
+        transform: scale(0.9);
+      }
+
+      .choice i {
+        color: #000000;
+        font-size: 50px;
+      }
+
+      .result {
+        text-align: center;
+        font-size: 2rem;
+        margin-top: 1rem;
+        color: #000000;
+      }
+
+      #computer-choice {
+        text-align: center;
+        font-size: 2rem;
+        color: #000000;
+      }
+
+      #play-again1 {
+        border: 2px solid #000000;
+        border-radius: 15px;
+        margin: 0 37rem;
+        font-style: italic;
+        font-size: medium;
+        padding: 1.7rem;
+        background-color: #ffffff;
+        transition: transform 0.3s;
+        display: flex;
+      }
+
+      #play-again1:hover {
+        transform: scale(1.1);
+        background-color: lavenderblush;
+        color: black;
+      }
+
+      #play-again1:active {
+        transform: scale(0.9);
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Rock, Paper, Scissors</h1>
+    <div class="scoreboard">
+      <h3 class="player-score">Player: 0</h3>
+      <h3 class="computer-score">Computer: 0</h3>
+      <h3 class="draw">Draw: 0</h3>
+    </div>
+    <div class="choices">
+      <div class="choice" id="rock">
+        <i class="fas fa-hand-rock"></i>
+      </div>
+      <div class="choice" id="paper">
+        <i class="fas fa-hand-paper"></i>
+      </div>
+      <div class="choice" id="scissors">
+        <i class="fas fa-hand-scissors"></i>
+      </div>
+    </div>
+    <div class="result" id="result">
+      <p>Choose your weapon</p>
+    </div>
+    <div id="computer-choice"></div>
+
+    <button class="play-again" id="play-again1">Play Again</button>
+    <p>This is Developed By Aayush Shrestha</p>
+    <script>
+      $(document).ready(function () {
+        var cpuScore;
+        var paper = 0;
+        var rock = 1;
+        var scissor = 2;
+
+        var computerScore = 0;
+        var playerScore = 0;
+        var draw = 0;
+
+        $("#paper").click(function () {
+          var playerWeapon = 0;
+          var computerWeapon = Math.floor(Math.random() * 3);
+          updateScore(playerWeapon, computerWeapon);
+        });
+        $("#rock").click(function () {
+          var playerWeapon = 1;
+          var computerWeapon = Math.floor(Math.random() * 3);
+          updateScore(playerWeapon, computerWeapon);
+        });
+        $("#scissors").click(function () {
+          var playerWeapon = 2;
+          var computerWeapon = Math.floor(Math.random() * 3);
+          updateScore(playerWeapon, computerWeapon);
+        });
+        $("#play-again1").click(function () {
+          playerScore = 0;
+          computerScore = 0;
+          draw = 0;
+          $(".player-score").text("Player:" + playerScore);
+          $(".computer-score").text("Computer :" + computerScore);
+          $(".draw").text("Draw:" + draw);
+        });
+
+        function updateScore(playerWeapon, computerWeapon) {
+          if (
+            (playerWeapon == 0 && computerWeapon == 0) ||
+            (playerWeapon == 2 && computerWeapon == 2) ||
+            (playerWeapon == 1 && computerWeapon == 1)
+          ) {
+            draw += 1;
+          } else if (
+            (playerWeapon == 1 && computerWeapon == 2) ||
+            (playerWeapon == 0 && computerWeapon == 1) ||
+            (playerWeapon == 2 && computerWeapon == 0)
+          ) {
+            computerScore += 1;
+            // document.write(computerScore);
+          } else {
+            playerScore += 1;
+            // document.write(playerScore);
+          }
+
+          $(".player-score").text("Player:" + playerScore);
+          $(".computer-score").text("Computer :" + computerScore);
+          $(".draw").text("Draw:" + draw);
+        }
+      });
+    </script>
+  </body>
+</html>
